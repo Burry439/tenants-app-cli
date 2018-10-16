@@ -5,22 +5,22 @@
 
     <!-- this p-dialog is a Material Design Component from PrimeNG to create a dialog -->
 
-        <p-dialog header="Add Tenant" [(visible)]="display">
-                <form  id="contactFrm" name="contactFrm" #f="ngForm">
-                        Name:
-                        <input type="text" ngModel #name=ngModel  placeholder="Tenant Name" value='' name="name" class="txt" required> <br>
+        <p-dialog header="Add Tenant" [(visible)]="display" [minWidth]="400">
+                <form  id="contactFrm" name="contactFrm" #f="ngForm" class="form-group">
+                       
+                        Name: <input type="text" ngModel #name=ngModel  placeholder="Name" value='' name="name" class="txt form-control" required> <br>
                         <span *ngIf="!name.valid && name.touched">please enter a name</span><br>
 
 
-                        Address: <input type="text" ngModel #address=ngModel placeholder="Tenants Address" value='' name="address" class="txt" required> <br>
+                        Address: <input type="text" ngModel #address=ngModel placeholder="Address" value='' name="address" class="txt form-control" required> <br>
                         <span *ngIf="!address.valid && address.touched">please enter an address</span><br>
 
-                       NUmber: <input type="number" ngModel #phone=ngModel  placeholder="Tenants Phone Number" value='' name="phone" class="txt" required> <br>
+                       Number: <input type="number" ngModel #phone=ngModel  placeholder="Phone Number" value='' name="phone" class="form-control txt" required> <br>
                         <span *ngIf="!phone.valid && phone.touched">please enter a Phone Number</span><br>
 
 
-                       Debt:  <input type="number" ngModel #debt=ngModel placeholder="Tenants Debt" value='' name="debt" class="txt" required><br>
-                        <span *ngIf="!debt.valid && debt.touched">please enter a debt amount Ener 0 if you dont have any debt</span><br>
+                       Debt:  <input type="number" ngModel #debt=ngModel placeholder="Debt Amount" value='' name="debt" class="txt form-control" required><br>
+                        <span *ngIf="!debt.valid && debt.touched">please enter a debt amount 0 means no debt</span><br>
 
                          <button [disabled]="!f.valid" type="button" value="submit" name="submit" class="txt2" (click)="addTenant(f)" class="btn btn-primary">Add Tenant</button>
                     </form>
@@ -29,18 +29,18 @@
 
 <!-- add the search component  -->
 
-<app-search [tenants]="tenants"></app-search> 
+<app-search [tenants]="tenants" ></app-search> 
 
 
 <!-- toggles whether or not show the dialog -->
 
-<button type="button" (click)="showDialog()" class="btn  btn-success" label="Show">Add Tenant</button>
+<button type="button" (click)="showDialog()" class="btn  btn-success" style="margin:auto; display:block; margin-top:20px;" label="Show">Add Tenant</button>
 
 
     <!-- here is where i add the radio buttons for which tenants to show -->
 
-    <h1>Showing {{filterType}}</h1>
-        <form>
+    <h1 style="text-align:center;">Showing {{filterType}}</h1>
+        <form style="text-align:center">
 
         <label><input (click)="toggleDisplayedTenents('All')" checked type="radio" class="radio-inline" name="radios" value="All"><span class="outside"><span class="inside"></span></span>All</label>
         <label><input (click)="toggleDisplayedTenents('With Debt')" type="radio"class="radio-inline" name="radios" value="With Debt"><span class="outside"><span class="inside"></span></span>With Debt</label>
@@ -51,6 +51,8 @@
     <!-- here i create a table and use an ngFor loop to create the rows and cells for the tenants i also listen for the delete emission from the tenant component  -->
 
     <div class="method">
+
+
         <div class="row margin-0 list-header">
             <div class="col-md-3"><div class="header">Name</div></div>
             <div class="col-md-2"><div class="header">Address</div></div>

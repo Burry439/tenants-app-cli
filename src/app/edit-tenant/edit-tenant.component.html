@@ -3,36 +3,36 @@
 <!-- here i am creating simple form to send to the server with the edit information with angular validation  -->
 
 
-<div class="container" *ngIf="tenant">
+<div class="container" *ngIf="tenant" style="margin-top:20px; " >
 
     <button class="btn btn-primary" [routerLink]="['/tenants']">Back</button><br>
 
-      <h1>Edit {{tenant.name}}</h1>
+      <h1 style="text-align:center">Edit {{tenant.name}}</h1>
 
 
-    <div class="row">
+    <div class="row" >
 
-        <div class="col-md-5">
+        <div class="col-8 ">
 
         <div class="form_main">
                     <div class="form">
-                    <form  id="contactFrm" name="contactFrm" #f="ngForm">
+                    <form  id="contactFrm" name="contactFrm" #f="ngForm" class="form-group" style="text-align:center">
                         <label for="">Name</label>
-                        <input type="text" ngModel #name=ngModel  placeholder={{tenant.name}} value='' name="name" class="txt" required>
+                        <input type="text" ngModel #name=ngModel  placeholder={{tenant.name}} value='' name="name" class="txt form-control" required>
                         <span *ngIf="!name.valid && name.touched">please enter a name</span><br>
 
 
                         <label for="">Address</label>
-                        <input type="text" ngModel #address=ngModel placeholder={{tenant.address}} value='' name="address" class="txt" required>
+                        <input type="text" ngModel #address=ngModel placeholder={{tenant.address}} value='' name="address" class="txt form-control" required>
                         <span *ngIf="!address.valid && address.touched">please enter an address</span><br>
 
                         <label for="">Phone Number</label>
-                        <input type="number" ngModel #phone=ngModel  placeholder={{tenant.phone}} value='' name="phone" class="txt" required><br>
-                        <span *ngIf="!phone.valid && phone.touched">please enter a Phone Number</span><br>
+                        <input type="number" ngModel #phone=ngModel  placeholder={{tenant.phone}} value='' min="0" name="phone" class="txt form-control" minlength="10" required><br>
+                        <span *ngIf="!phone.valid && phone.touched">please enter a valid Phone Number</span><br>
 
 
                         <label for="">Debt</label>
-                        <input type="number" ngModel #debt=ngModel placeholder={{tenant.debt}} value='' name="debt" class="txt" required><br>
+                        <input type="number" ngModel #debt=ngModel placeholder={{tenant.debt}} value='' min="0" name="debt" class="txt form-control"  required><br>
                         <span *ngIf="!debt.valid && debt.touched">please enter a debt amount Ener 0 if you dont have any debt</span><br>
 
                          <button [disabled]="!f.valid" type="button" value="submit" name="submit" class="txt2" (click)="confirmChange(tenant._id, f)" class="btn btn-primary">confirmChange</button>

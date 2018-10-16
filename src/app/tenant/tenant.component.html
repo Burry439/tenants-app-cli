@@ -1,15 +1,15 @@
         <!-- this p-dialog is a Material Design Component from PrimeNG to create a dialog -->
 
-            <p-dialog header="Delete Tenant" [(visible)]="display">
-                   <p> Are you sure you want to delete {{tenant.name}} ?</p>
-                   <button type="text" (click)="delete(tenant._id)" class="btn btn-sm btn-danger" label="Show" style="margin-right:10px;">Yes</button>
-                    <button type="text" (click)="display = false" class="btn btn-sm btn-success" label="Show" >No</button>
+            <p-dialog header="Delete Tenant" [(visible)]="display" >
+                   <p > Are you sure you want to delete {{tenant.name}} ?</p>
+                   <button  type="text" (click)="delete(tenant._id)" class="btn btn-sm btn-danger" label="Show" style="margin: 10px 10px 0px 70px;">Yes</button>
+                    <button type="text" (click)="display = false" class="btn btn-sm btn-success" label="Show" style="margin-top:10px;">No</button>
                 </p-dialog>
 
               <!-- here i finish createing a table of all the tenants and add a router link to the edit tenants page -->
 
 
-        <div class="row margin-0">
+        <div class="row">
             <div class="col-md-3">
                 <div class="cell">
                     <div class="propertyname">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
               
                 <div class="cell">
                     <div class="description">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-0.5" >
                     <div class="cell">
                         <div class="propertyname">
                           <a class="btn btn-sm btn-primary"  [routerLink]="['/tenant', tenant._id]" style="margin-right:10px;">Edit</a>
