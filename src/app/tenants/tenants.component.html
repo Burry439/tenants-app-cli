@@ -1,0 +1,71 @@
+
+
+<div class="container">
+
+
+    <!-- this p-dialog is a Material Design Component from PrimeNG to create a dialog -->
+
+        <p-dialog header="Add Tenant" [(visible)]="display">
+                <form  id="contactFrm" name="contactFrm" #f="ngForm">
+                        Name:
+                        <input type="text" ngModel #name=ngModel  placeholder="Tenant Name" value='' name="name" class="txt" required> <br>
+                        <span *ngIf="!name.valid && name.touched">please enter a name</span><br>
+
+
+                        Address: <input type="text" ngModel #address=ngModel placeholder="Tenants Address" value='' name="address" class="txt" required> <br>
+                        <span *ngIf="!address.valid && address.touched">please enter an address</span><br>
+
+                       NUmber: <input type="number" ngModel #phone=ngModel  placeholder="Tenants Phone Number" value='' name="phone" class="txt" required> <br>
+                        <span *ngIf="!phone.valid && phone.touched">please enter a Phone Number</span><br>
+
+
+                       Debt:  <input type="number" ngModel #debt=ngModel placeholder="Tenants Debt" value='' name="debt" class="txt" required><br>
+                        <span *ngIf="!debt.valid && debt.touched">please enter a debt amount Ener 0 if you dont have any debt</span><br>
+
+                         <button [disabled]="!f.valid" type="button" value="submit" name="submit" class="txt2" (click)="addTenant(f)" class="btn btn-primary">Add Tenant</button>
+                    </form>
+             </p-dialog>
+
+
+<!-- add the search component  -->
+
+<app-search [tenants]="tenants"></app-search> 
+
+
+<!-- toggles whether or not show the dialog -->
+
+<button type="button" (click)="showDialog()" class="btn  btn-success" label="Show">Add Tenant</button>
+
+
+    <!-- here is where i add the radio buttons for which tenants to show -->
+
+    <h1>Showing {{filterType}}</h1>
+        <form>
+
+        <label><input (click)="toggleDisplayedTenents('All')" checked type="radio" class="radio-inline" name="radios" value="All"><span class="outside"><span class="inside"></span></span>All</label>
+        <label><input (click)="toggleDisplayedTenents('With Debt')" type="radio"class="radio-inline" name="radios" value="With Debt"><span class="outside"><span class="inside"></span></span>With Debt</label>
+        <label><input (click)="toggleDisplayedTenents('Without Debt')" type="radio" class="radio-inline" name="radios" value="Without Debt"><span class="outside"><span class="inside"></span></span>Without Debt</label>
+
+      </form>
+
+    <!-- here i create a table and use an ngFor loop to create the rows and cells for the tenants i also listen for the delete emission from the tenant component  -->
+
+    <div class="method">
+        <div class="row margin-0 list-header">
+            <div class="col-md-3"><div class="header">Name</div></div>
+            <div class="col-md-2"><div class="header">Address</div></div>
+            <div class="col-md-2"><div class="header">Phone Number</div></div>
+            <div class="col-md-5"><div class="header">Debt</div></div>
+
+        </div>
+
+        
+
+
+        <div *ngFor="let tenant of fillterdTenants">
+            <app-tenant [tenant]="tenant" (deleteTenant)="deleteTenant(tenant._id)"></app-tenant>
+            <hr>
+      </div>
+
+    </div>
+</div>

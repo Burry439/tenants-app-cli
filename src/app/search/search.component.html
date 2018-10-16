@@ -1,0 +1,31 @@
+
+
+<!-- here im createing a text input for searching for tenants by there name and if it finds one it displays it with a router link to the edit component -->
+
+
+<div class="container">
+    <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+              <div id="imaginary_container"> 
+                  <div class="input-group stylish-input-group">
+                      <input [(ngModel)]="search" type="text" class="form-control"  placeholder="Search For Tenant" (keyup)="find()">
+                      <span class="input-group-addon">
+                           
+                      </span>
+                  </div>
+              </div>
+
+              
+  <div *ngIf="foundTenants && search.length > 0" class="found">
+
+      <h1 *ngIf="foundTenants.length == 0">No users found</h1>
+    
+    <ul>
+      <a [routerLink]="['/tenant', tenant._id]" *ngFor="let tenant of foundTenants">{{tenant.name}}</a>
+    </ul>
+    
+    </div>
+
+          </div>
+    </div>
+  </div>
