@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { TenantsService } from '../services/tenants.service';
 import { Tenant } from '../shared/tenant';
+import {MessageService} from 'primeng/components/common/messageservice';
 
 
 
@@ -12,10 +15,11 @@ import { Tenant } from '../shared/tenant';
 })
 export class EditTenantComponent implements OnInit {
 
+  @ViewChild('f')tenantEditForm:NgForm
 
     tenant:Tenant
 
-  constructor(private ar: ActivatedRoute, private router : Router , private tenantsService: TenantsService) { }
+  constructor(private ar: ActivatedRoute, private tenantsService: TenantsService,private messageService: MessageService) { }
 
 
 
@@ -35,8 +39,11 @@ export class EditTenantComponent implements OnInit {
 
     return this.tenantsService.editTenant(tenant).subscribe((res:Tenant)=>{
 
-      this.router.navigate(['/tenants'])  
-        
+      console.log(res)
+      this.messageService.add({severity:'success', summary:'Tenant Edited', detail:'You edited ' + tenant.name + " he is now " + res.name});
+      this.tenant = res
+      this.tenantEditForm.reset()
+
 
     })
 

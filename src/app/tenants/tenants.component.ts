@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TenantsService } from '../services/tenants.service';
 import { Tenant } from '../shared/tenant'
+import {MessageService} from 'primeng/components/common/messageservice';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-tenants',
@@ -13,8 +15,9 @@ export class TenantsComponent implements OnInit {
   fillterdTenants:Array<Tenant> 
   filterType:String = 'All'
   display: boolean = false;
+  @ViewChild('f')addTenantForm:NgForm
 
-  constructor(private tenantsService : TenantsService) { }
+  constructor(private tenantsService : TenantsService,private messageService: MessageService) { }
 
 
   //// a simple function for displaying a Dialog
@@ -25,17 +28,19 @@ export class TenantsComponent implements OnInit {
   }
 
 
-  ///////// tells the tenantsService to tell the Node server to add a new tenant
+  ///////// tells the tenantsService to tell the Node server to add a new tenant then adds it in the callback and dispays a messgae
   addTenant(tenant)
   { 
     this.tenantsService.addTenant(tenant.value).subscribe((res:Tenant)=>{
         this.tenants.push(res)
+        this.messageService.add({severity:'success', summary:'Tenant Added', detail:'You added ' + res.name});
         this.display = false
+        this.addTenantForm.reset()
     })
     
   }
 
-  ///////// tells the tenantsService to tell the Node server to add a new tenant
+  ///////// remove a tenant then displays message
 
 
   deleteTenant(id)
@@ -43,7 +48,8 @@ export class TenantsComponent implements OnInit {
     for(let i = 0; i < this.tenants.length; i++)
     {
       if(this.tenants[i]._id == id)
-      {
+      { 
+        this.messageService.add({severity:'success', summary:'Tenant Deleted', detail:'You deleted ' + this.tenants[i].name});
         this.tenants.splice(i,1)
       }
     }

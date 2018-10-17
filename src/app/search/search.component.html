@@ -18,9 +18,9 @@
               
   <div *ngIf="foundTenants && search.length > 0" class="found">
 
-      <h1 *ngIf="foundTenants.length == 0">No users found</h1>
+      <h5 style="font-family: 'Quicksand', sans-serif;" *ngIf="foundTenants.length == 0">No users found</h5>
     
-    <ul>
+    <ul  style="font-family: 'Quicksand', sans-serif;">
       <a [routerLink]="['/tenant', tenant._id]" *ngFor="let tenant of foundTenants">{{tenant.name}}</a>
     </ul>
     

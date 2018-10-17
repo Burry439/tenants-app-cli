@@ -9,6 +9,28 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 
+
+///// primeNG Modules and services
+import {GrowlModule} from 'primeng/growl';
+import {MessageService} from 'primeng/components/common/messageservice';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { SearchComponent } from './search/search.component';
 import { EditTenantComponent } from './edit-tenant/edit-tenant.component';
 import { AppComponent } from './app.component';
@@ -43,9 +65,12 @@ const appRoutes:Routes = [
     RouterModule, 
     DialogModule,
     BrowserAnimationsModule,
+    GrowlModule,
+    MessagesModule,
+    MessageModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

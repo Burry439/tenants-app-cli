@@ -27,9 +27,9 @@ export class SearchComponent implements OnInit {
 
   find()
   {   
-    
+    console.log(this.search.length)
     this.foundTenants  = this.tenants.filter((tenant)=>{
-       return tenant.name.toLowerCase().includes(this.search.toLowerCase())
+        return tenant.name.toLowerCase().includes(this.search.toLowerCase())
     })
   }
 

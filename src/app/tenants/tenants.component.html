@@ -1,45 +1,54 @@
 
+<p-growl></p-growl>
+
+
 
 <div class="container">
 
 
-    <!-- this p-dialog is a Material Design Component from PrimeNG to create a dialog -->
+    <!-- this p-dialog is a Material Design Component from PrimeNG to create a dialog p-message displays the red warnings -->
 
-        <p-dialog header="Add Tenant" [(visible)]="display" [minWidth]="400">
+        <p-dialog header="Add Tenant" [(visible)]="display" [minWidth]="300">
                 <form  id="contactFrm" name="contactFrm" #f="ngForm" class="form-group">
                        
                         Name: <input type="text" ngModel #name=ngModel  placeholder="Name" value='' name="name" class="txt form-control" required> <br>
-                        <span *ngIf="!name.valid && name.touched">please enter a name</span><br>
+                        <p-message *ngIf="!name.valid && name.touched" severity="error" text="please enter a name"></p-message><br>
 
 
                         Address: <input type="text" ngModel #address=ngModel placeholder="Address" value='' name="address" class="txt form-control" required> <br>
-                        <span *ngIf="!address.valid && address.touched">please enter an address</span><br>
+                        <p-message *ngIf="!address.valid && address.touched" severity="error" text="please enter an address"></p-message><br>
 
                        Number: <input type="number" ngModel #phone=ngModel  placeholder="Phone Number" value='' name="phone" class="form-control txt" required> <br>
-                        <span *ngIf="!phone.valid && phone.touched">please enter a Phone Number</span><br>
+                        <p-message *ngIf="!phone.valid && phone.touched" severity="error" text="please enter a Phone Number"></p-message><br>
 
 
                        Debt:  <input type="number" ngModel #debt=ngModel placeholder="Debt Amount" value='' name="debt" class="txt form-control" required><br>
-                        <span *ngIf="!debt.valid && debt.touched">please enter a debt amount 0 means no debt</span><br>
+                        <p-message *ngIf="!debt.valid && debt.touched" severity="error" text="please enter a debt amount 0 means no debt"></p-message><br>
 
                          <button [disabled]="!f.valid" type="button" value="submit" name="submit" class="txt2" (click)="addTenant(f)" class="btn btn-primary">Add Tenant</button>
                     </form>
              </p-dialog>
 
 
-<!-- add the search component  -->
 
-<app-search [tenants]="tenants" ></app-search> 
-
-
-<!-- toggles whether or not show the dialog -->
-
-<button type="button" (click)="showDialog()" class="btn  btn-success" style="margin:auto; display:block; margin-top:20px;" label="Show">Add Tenant</button>
 
 
     <!-- here is where i add the radio buttons for which tenants to show -->
 
+    <div class="jumbotron" style="margin-top:20px;">
     <h1 style="text-align:center;">Showing {{filterType}}</h1>
+    </div>
+
+    <!-- add the search component  -->
+
+<app-search [tenants]="tenants" ></app-search> 
+<a (click)="showDialog()" style="margin:auto; display:block; margin-top:20px; width:100px;" class="btn icon-btn btn-success"><span style="text-align: center" class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>Add</a>
+
+
+<!-- toggles whether or not show the dialog -->
+
+<!-- <button type="button" (click)="showDialog()" class="btn  btn-success" style="margin:auto; display:block; margin-top:20px;" label="Show">Add Tenant</button> -->
+    
         <form style="text-align:center">
 
         <label><input (click)="toggleDisplayedTenents('All')" checked type="radio" class="radio-inline" name="radios" value="All"><span class="outside"><span class="inside"></span></span>All</label>
@@ -50,16 +59,16 @@
 
     <!-- here i create a table and use an ngFor loop to create the rows and cells for the tenants i also listen for the delete emission from the tenant component  -->
 
-    <div class="method">
+    <div class="method" >
 
-
-        <div class="row margin-0 list-header">
+        <div class="row margin-0 list-header" style="  font-family: 'Marcellus SC', serif;">
             <div class="col-md-3"><div class="header">Name</div></div>
             <div class="col-md-2"><div class="header">Address</div></div>
             <div class="col-md-2"><div class="header">Phone Number</div></div>
-            <div class="col-md-5"><div class="header">Debt</div></div>
+            <div class="col-md-4"><div class="header">Debt</div></div>
+            <div class="col-md-1"><div class="header">Options</div></div>
 
-        </div>
+        </div> 
 
         
 
@@ -70,4 +79,6 @@
       </div>
 
     </div>
-</div>
+</div> 
+
+
